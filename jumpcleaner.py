@@ -21,3 +21,4 @@ if __name__ == '__main__':
         pass
     if platform.system() == 'Darwin':
         mac_cleaner()
+        exit()

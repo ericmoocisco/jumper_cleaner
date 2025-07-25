@@ -5,30 +5,17 @@ from datetime import datetime
 import traceback
 
 
-def windows_cleaner():
-    pass
-
-
-def mac_cleaner():
+def uni_cleaner():
     try:
-        log_path = "/tmp/cron_test.txt"
-        with open(log_path, "a") as f:
-            f.write(f"Ran at {datetime.now()}\n")
+        cwd = Path(os.path.join(os.path.expanduser("~"), "Downloads"))
+        rdp_files = list((cwd).glob("*.rdp"))
+        for file in rdp_files:
+            file.unlink()
 
-            os.chdir('/Users/ericmoo/Downloads')
-            f.write("Directory changed\n")
 
-            cwd = Path.cwd()
-
-            rdp_files = list(cwd.glob("*.rdp"))
-            for file in rdp_files:
-                file.unlink()
-                f.write(f"Deleted RDP: {file}\n")
-
-            ica_files = list(cwd.glob("*.ica"))
-            for file in ica_files:
-                file.unlink()
-                f.write(f"Deleted ICA: {file}\n")
+        ica_files = list((cwd).glob("*.ica"))
+        for file in ica_files:
+            file.unlink()
 
 
     except Exception as e:
@@ -37,27 +24,11 @@ def mac_cleaner():
             error_log.write(traceback.format_exc() + "\n")
 
 
-def test_cleaner():
-    with open("/tmp/log.txt", "a") as f:
-        try:
-            os.chdir('/Users/ericmoo/Downloads')
-            f.write("Directory changed\n")
-            cwd = Path.cwd()
-            log_path = "/tmp/cron_test.txt"
-            all_files = list(cwd.glob("*"))
-            f.write(f"Found {len(all_files)} total entries in Downloads:\n")
-            for file in all_files:
-                f.write(f"-> {file.name} (suffix: {file.suffix})\n")
-        except Exception as e:
-            f.write(f"{e}:\n")
+
+
 
 
 
 if __name__ == '__main__':
-    if platform.system() == 'Windows':
-        pass
-    if platform.system() == 'Darwin':
-        mac_cleaner()
-        exit()
-    # else:
-    #     test_cleaner()
+    uni_cleaner()
+    exit

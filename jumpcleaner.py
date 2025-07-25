@@ -11,10 +11,11 @@ def uni_cleaner():
         rdp_files = list((cwd).glob("*.rdp"))
         for file in rdp_files:
             file.unlink()
-
-
         ica_files = list((cwd).glob("*.ica"))
         for file in ica_files:
+            file.unlink()
+        cr_files = list((cwd).glob("*.cr"))
+        for file in cr_files:
             file.unlink()
 
 

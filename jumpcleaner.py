@@ -14,7 +14,7 @@ def uni_cleaner():
         ica_files = list((cwd).glob("*.ica"))
         for file in ica_files:
             file.unlink()
-        cr_files = list((cwd).glob("*.cr"))
+        cr_files = list((cwd).glob("*.crdownload"))
         for file in cr_files:
             file.unlink()
 
